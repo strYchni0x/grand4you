@@ -114,6 +114,10 @@ Source: https://wordpress.org/themes/twentytwentyone/
 
 == Changelog ==
 
+Version 1.0.1
+-------------
+- Fixed empty first cell in the post grid: the Masonry .grid-sizer no longer occupies a flex slot, so the first post stays in the top-left even when Masonry has not laid out yet.
+
 Version 1.0.0
 -------------
 - Initial release of Grand4You fork based on Eksell 1.9.5.

@@ -2,7 +2,7 @@
 
 	Theme Name: Grand4You
 	Text Domain: grand4you
-	Version: 1.0.0
+	Version: 1.0.1
 	Description: Grand4You is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site. Visitors can filter posts without reloading the page, full color settings in the Customizer give easy control over all colors, including a separate dark mode color scheme. Also features a Blank Canvas page template, numbered or infinite pagination, an optional search overlay, a sticky header, Fediverse social icons, a footer menu, custom logo support, and developer friendly code. Based on Eksell by Anders Norén.
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Florian Willnat
@@ -2284,8 +2284,21 @@ a.sub-menu-toggle.active svg {
 	position: relative;
 }
 
-.no-js .grid-sizer {
-	display: none;
+/*
+ * The .grid-sizer only exists so Masonry can measure the column width. Take it
+ * out of the flex flow so it never occupies a visible grid cell. Otherwise, if
+ * Masonry hasn't laid out yet (slow images) or fails to run (a JS error in an
+ * earlier init, a blocked CDN script), the empty sizer sits in the first column
+ * and pushes every post one slot to the right – leaving the top-left cell blank.
+ * It stays measurable because Masonry sets .posts-grid to position: relative, so
+ * the percentage width still resolves against the grid container.
+ */
+.grid-sizer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 0;
+	visibility: hidden;
 }
 
 .posts .article-wrapper {
